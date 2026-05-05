@@ -35,8 +35,14 @@ func getPossibleLocks() -> Array:
 	var possible:Array = []
 	if(!GM.pc.isMuzzled() && !GM.pc.isBitingBlocked() && !GM.pc.isGagged()):
 		possible.append("ringgag")
+	if(!GM.pc.isMuzzled() && !GM.pc.isBitingBlocked() && !GM.pc.isGagged() && GlobalRegistry.getModules().has("GooBondage")):
+		possible.append("goomask")
+	if(!GM.pc.isBlindfolded()):
+		possible.append("hypnovisormk1")
 	if(!GM.pc.hasBlockedHands()):
 		possible.append("mittens")
+	if(!GM.pc.hasBlockedHands() && GlobalRegistry.getModules().has("BDSMstuff")):
+		possible.append("longlatexmittens")
 	if(!GM.pc.hasBoundArms()):
 		possible.append("arms")
 	if(!GM.pc.hasBoundLegs()):
@@ -44,14 +50,21 @@ func getPossibleLocks() -> Array:
 	if(!GM.pc.isWearingChastityCage() && GM.pc.hasReachablePenis()):
 		possible.append("cage")
 		possible.append("cageflat")
+		possible.append("cageadvanced")
 	
 	return possible
 
 func getLockNameDesc(_lock:String) -> Array:
 	if(_lock == "ringgag"):
 		return ["Ring-gag", "Agree to be gagged"]
+	if(_lock == "goomask"):
+		return ["Goo mask", "Agree to wear goo mask"]
+	if(_lock == "hypnovisormk1"):
+		return ["Hypnovisor", "Agree to wear hypnovisor"]
 	if(_lock == "mittens"):
 		return ["Mittens", "Agree to wear bondage mittens"]
+	if(_lock == "longlatexmittens"):
+		return ["Long latex mittens", "Agree to wear long latex mittens"]
 	if(_lock == "arms"):
 		return ["Wrist cuffs", "Agree to have your arms cuffed"]
 	if(_lock == "legs"):
@@ -60,6 +73,8 @@ func getLockNameDesc(_lock:String) -> Array:
 		return ["Chastity cage", "Agree to have your cock caged"]
 	if(_lock == "cageflat"):
 		return ["Flat chastity cage", "Agree to have your cock caged with a flat cage"]
+	if(_lock == "cageadvanced"):
+		return ["Advanced chastity cage", "Agree to have your cock caged with an advanced cage"]
 	
 	return ["ERROR?", "Something went wrong"]
 
@@ -70,6 +85,7 @@ func getHumanReadablePossibleListString() -> String:
 	return Util.humanReadableList(thePossible)
 	
 func start():
+	Log.print("BDSMstuff found = "+str(GlobalRegistry.getModules().has("BDSMstuff"))+" / GooBondage found = "+str(GlobalRegistry.getModules().has("GooBondage")))
 	playStand()
 	
 	saynn("{npc.name} approaches you.. "+("holding a few items." if pickedLocks.size() > 1 else "holding something."))
@@ -94,8 +110,14 @@ func start_do(_id:String, _args:Array):
 		
 		if(pickedLock == "ringgag"):
 			theItem = GlobalRegistry.createItem("ringgag")
+		elif(pickedLock == "goomask"):
+			theItem = GlobalRegistry.createItem("goomask")
+		elif(pickedLock == "hypnovisormk1"):
+			theItem = GlobalRegistry.createItem("HypnovisorMk1")
 		elif(pickedLock == "mittens"):
 			theItem = GlobalRegistry.createItem("bondagemittens")
+		elif(pickedLock == "longlatexmittens"):
+			theItem = GlobalRegistry.createItem("Long latex mittens")
 		elif(pickedLock == "arms"):
 			theItem = GlobalRegistry.createItem("inmatewristcuffs")
 		elif(pickedLock == "legs"):
@@ -104,6 +126,8 @@ func start_do(_id:String, _args:Array):
 			theItem = GlobalRegistry.createItem("ChastityCage")
 		elif(pickedLock == "cageflat"):
 			theItem = GlobalRegistry.createItem("ChastityCageFlat")
+		elif(pickedLock == "cageadvanced"):
+			theItem = GlobalRegistry.createItem("ChastityCageAdvanced")
 		
 		if(theItem):
 			GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(theItem)
@@ -115,7 +139,7 @@ func start_do(_id:String, _args:Array):
 		setState("afterLocked")
 
 func afterLocked():
-	if(pickedLock in ["cage", "cageflat"]):
+	if(pickedLock in ["cage", "cageflat", "cageadvanced"]):
 		playAnimation(StageScene.Duo, "stand", {npc=getOwnerID(), bodyState={naked=true}})
 	else:
 		playStand()
