@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Modules/MoreBDSMstuffModule/Models/Toys/Breast/BreastMassager/toy1.png" type="Texture" id=2]
+
+[node name="Spatial" type="Spatial"]
+
+[node name="Spatial" type="Spatial" parent="."]
+transform = Transform( 0.266488, 0.113914, 0, -0.0791702, 0.383437, 0, 0, 0, 1, 0.127, -0.024, 0.01 )
+
+[node name="Sprite3D" type="Sprite3D" parent="Spatial"]
+physics_interpolation_mode = 1
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.411, 0.026, 0 )
+texture = ExtResource( 2 )

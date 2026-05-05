@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Player/Player3D/Parts/AttachmentProxy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/Player3D/Parts/AttachmentProxy.gd" type="Script" id=2]
+[ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=3]
+
+[node name="Legs" instance=ExtResource( 3 )]
+
+[node name="AttachmentProxy2" parent="." index="0" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.526732, 5.91119, 0.048 )
+boneId = "Chest"
+zoneName = "back_moreBDSMstuff"
+
+[node name="AttachmentProxy" type="Position3D" parent="." index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38, 3.25, 0 )
+script = ExtResource( 2 )
+boneId = "Chest"
+zoneName = "Armbinder"

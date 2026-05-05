@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Modules/MoreBDSMstuffModule/Models/LeatherArmbinder/armbl_closed.png" type="Texture" id=2]
+[ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=3]
+
+[node name="Legs" instance=ExtResource( 3 )]
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.252, -0.493, 0.419 )
+texture = ExtResource( 2 )

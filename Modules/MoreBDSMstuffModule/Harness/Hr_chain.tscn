@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Player/Player3D/Chains/CurveRenderer.gd" type="Script" id=1]
+[ext_resource path="res://Modules/MoreBDSMstuffModule/Models/Cuff/Chain_cuff_alt.png" type="Texture" id=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_transparent = true
+flags_unshaded = true
+flags_do_not_receive_shadows = true
+flags_disable_ambient_light = true
+params_cull_mode = 2
+params_depth_draw_mode = 3
+albedo_texture = ExtResource( 2 )
+
+[node name="NormalChain" type="ImmediateGeometry"]
+material_override = SubResource( 1 )
+script = ExtResource( 1 )
+anchorOffset = Vector3( 0.084, -0.048, -0.168 )
+originOffset = Vector3( 0.085, -0.088, 0 )
+width = 0.5
+flex = 1.0
+sag_static = 0.1
+expected_length = 0.1

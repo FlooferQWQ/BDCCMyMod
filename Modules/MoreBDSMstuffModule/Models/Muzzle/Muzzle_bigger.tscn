@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Modules/MoreBDSMstuffModule/Models/Muzzle/muzzle2.png" type="Texture" id=1]
+
+[node name="BlindfoldModel" type="Spatial"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 1, 0.073, 0.032, 0.276 )
+texture = ExtResource( 1 )
