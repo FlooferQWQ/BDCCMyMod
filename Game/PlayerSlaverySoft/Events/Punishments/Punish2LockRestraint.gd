@@ -55,8 +55,8 @@ func getPossibleLocks() -> Array:
 	var possible:Array = []
 	if(!GM.pc.isMuzzled() && !GM.pc.isBitingBlocked() && !GM.pc.isGagged()):
 		possible.append("ringgag")
-	if(!GM.pc.isMuzzled() && !GM.pc.isBitingBlocked() && !GM.pc.isGagged() && GlobalRegistry.getModules().has("GooBondage")):
-		possible.append("goomask")
+	#if(!GM.pc.isMuzzled() && !GM.pc.isBitingBlocked() && !GM.pc.isGagged() && GlobalRegistry.getModules().has("GooBondage")):
+	#	possible.append("goomask")
 	if(!GM.pc.isBlindfolded()):
 		possible.append("hypnovisormk1")
 	if(!GM.pc.hasBlockedHands()):
