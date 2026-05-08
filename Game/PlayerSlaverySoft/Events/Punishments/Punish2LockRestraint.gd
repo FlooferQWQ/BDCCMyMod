@@ -36,6 +36,8 @@ func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> 
 		theItem = GlobalRegistry.createItem("ChastityCageFlat")
 	elif(pickedLock == "cageadvanced"):
 		theItem = GlobalRegistry.createItem("ChastityCageAdvanced")
+	elif(pickedLock == "puppySuit"):
+			theItem = GlobalRegistry.createItem("puppy_restraints")
 	
 	if(!theItem):
 		return false
@@ -71,6 +73,8 @@ func getPossibleLocks() -> Array:
 		possible.append("cage")
 		possible.append("cageflat")
 		possible.append("cageadvanced")
+	if(!GM.pc.isBodypartCovered(BodypartBody) && GlobalRegistry.getModules().has("PuppyRestraintsMod")):
+		possible.append("puppySuit")
 	
 	return possible
 
@@ -95,11 +99,13 @@ func getLockNameDesc(_lock:String) -> Array:
 		return ["a Flat chastity cage", "Agree to have your cock caged with a flat cage"]
 	if(_lock == "cageadvanced"):
 		return ["Advanced chastity cage", "Agree to have your cock caged with an advanced cage"]
+	if(_lock == "puppySuit"):
+		return ["Puppy Restraints", "Agree to wear puppy restraints"]
 	
 	return ["ERROR?", "Something went wrong"]
 
 func start():
-	Log.print("BDSMstuff found = "+str(GlobalRegistry.getModules().has("BDSMstuff"))+" / GooBondage found = "+str(GlobalRegistry.getModules().has("GooBondage")))
+	Log.print("BDSMstuff found = "+str(GlobalRegistry.getModules().has("BDSMstuff"))+" / GooBondage found = "+str(GlobalRegistry.getModules().has("GooBondage"))+"\nBodyPart Body free = "+ str(!GM.pc.isBodypartCovered(BodypartBody))+" / PuppyRestraintsMod found = "+str(GlobalRegistry.getModules().has("PuppyRestraintsMod")))
 	if(pickedLock in ["cage", "cageflat", "cageadvanced"]):
 		playAnimation(StageScene.Duo, "hurt", {npc=getOwnerID(), bodyState={naked=true}})
 	else:
